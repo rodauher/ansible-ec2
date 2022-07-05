@@ -47,16 +47,15 @@
   vars:
     ansible_user: ec2-user
   tasks:
-    - name: Install httpd
-      yum: name=httpd state=present update_cache=yes
+    - name: Install openjdk
+      yum: name=java-1.8.0-openjdk state=present update_cache=yes
 
-    - name: Start httpd
-      service:
-        name: httpd
-        enabled: true
-        state: started
-
-    - name: Install vue-2048
+    - name: Install heelo-springrest
       copy:
-        src: /home/sinensia/Desktop/vue-2048/dist/
-        dest: /var/www/html
+        src: /home/sinensia/Desktop/hello-springrest/build/libs/rest-service-0.0.1-SNAPSHOT.jar
+        dest: /var/myapp/
+
+    - name: Iniciar server
+      shell: ln -s /var/myapp/rest-service-0.0.1-SNAPSHOT.jar /etc/init.d/myapp ; service myapp start
+
+
