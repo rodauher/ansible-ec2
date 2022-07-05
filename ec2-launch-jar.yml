@@ -57,8 +57,14 @@
         src: /home/sinensia/Desktop/hello-springrest/build/libs/rest-service-0.0.1-SNAPSHOT.jar
         dest: /var/myapp/
 
-    - name: Iniciar server
+    - name: SymLink
       become: true
-      shell: sudo ln -s /var/myapp/rest-service-0.0.1-SNAPSHOT.jar /etc/init.d/myapp ; sudo chmod +x /etc/init.d/myapp ; service myapp start
+      shell: sudo ln -s /var/myapp/rest-service-0.0.1-SNAPSHOT.jar /etc/init.d/myapp
+
+    - name: Start jar as a service
+      service:
+      name: myapp
+      enabled: true
+      state: started
 
 
