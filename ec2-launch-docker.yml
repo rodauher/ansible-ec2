@@ -52,7 +52,7 @@
 
     - name: User add docker group
       user:
-        name: johnd
+        name: ec2-user
         group: docker
 
     - name: Start docker
